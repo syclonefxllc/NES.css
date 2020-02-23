@@ -1,36 +1,41 @@
-.input {
+.nes-input,
+.nes-textarea {
   @mixin border-style($border, $outline) {
+    @include compact-border-image($border);
+
     outline-color: $outline;
-    // prettier-ignore
-    box-shadow:
-      0 4px $border,
-      0 -4px $border,
-      4px 0 $border,
-      -4px 0 $border;
   }
 
+  @include compact-rounded-corners();
+
+  width: calc(100% - #{2 * $border-size});
   padding: 0.5rem 1rem;
   margin: 4px;
-  border: none;
+  background-clip: padding-box;
 
-  @include border-style($base-color, #e7e7e7);
+  &.is-dark {
+    @include border-style(map-get($default-colors, "normal"), map-get($default-colors, "hover"));
 
+    color: $background-color;
+    background-color: $base-color;
+  }
   &.is-success {
-    @include border-style(#209cee, #108de0);
+    @include border-style(map-get($success-colors, "normal"), map-get($success-colors, "hover"));
   }
   &.is-warning {
-    @include border-style(#f7d51d, #f2c409);
+    @include border-style(map-get($warning-colors, "normal"), map-get($warning-colors, "hover"));
   }
   &.is-error {
-    @include border-style(#e76e55, #ce372b);
+    @include border-style(map-get($error-colors, "normal"), map-get($error-colors, "hover"));
   }
 }
 
-.field {
+.nes-field {
   > label {
     display: block;
   }
-  .input {
+  .nes-input,
+  .nes-textarea {
     display: block;
   }
 
@@ -46,9 +51,25 @@
       text-align: right;
     }
 
-    .input {
+    .nes-input,
+    .nes-textarea {
       flex-basis: 0;
       flex-grow: 5;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nes-field.is-inline {
+    display: block;
+
+    > label {
+      margin-bottom: 0.5rem; // reboot.css:label
+      text-align: left;
+    }
+
+    .nes-input {
+      max-width: 100%;
     }
   }
 }

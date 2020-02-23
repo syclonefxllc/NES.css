@@ -1,25 +1,36 @@
-.balloon {
+@mixin box-shadow($color, $fromLeft: true) {
+  @if $fromLeft {
+    // prettier-ignore
+    box-shadow:
+      -4px 0,
+      4px 0,
+      -4px 4px $color,
+      0 4px,
+      -8px 4px,
+      -4px 8px,
+      -8px 8px;
+  } @else {
+    // prettier-ignore
+    box-shadow:
+      -4px 0,
+      4px 0,
+      4px 4px $color,
+      0 4px,
+      8px 4px,
+      4px 8px,
+      8px 8px;
+  }
+}
+
+.nes-balloon {
+  @include rounded-corners();
+
   position: relative;
   display: inline-block;
   padding: 1rem 1.5rem;
   margin: 8px;
   margin-bottom: 30px;
   background-color: $background-color;
-
-  // prettier-ignore
-  box-shadow:
-    0 -4px $background-color,
-    0 -8px $base-color,
-    4px 0 $background-color,
-    4px -4px $base-color,
-    8px 0 $base-color,
-    0 4px $background-color,
-    0 8px $base-color,
-    -4px 0 $background-color,
-    -4px 4px $base-color,
-    -8px 0 $base-color,
-    -4px -4px $base-color,
-    4px 4px $base-color;
 
   > :last-child {
     margin-bottom: 0;
@@ -29,6 +40,46 @@
   &::after {
     position: absolute;
     content: "";
+  }
+
+  &.is-dark {
+    @include rounded-corners(true);
+
+    color: $background-color;
+    background: $base-color;
+    border-image-outset: 2;
+    box-shadow: 0 0 0 8px $base-color;
+
+    &.from-left,
+    &.from-right {
+      &::before {
+        background-color: $base-color;
+        border-color: $background-color;
+      }
+
+      &::after {
+        color: $background-color;
+        background-color: $base-color;
+      }
+    }
+
+    &.from-left {
+      &::before {
+        box-shadow: -5px 10px 0 6px $base-color;
+      }
+      &::after {
+        @include box-shadow($base-color);
+      }
+    }
+
+    &.from-right {
+      &::before {
+        box-shadow: 5px 10px 0 6px $base-color;
+      }
+      &::after {
+        @include box-shadow($base-color, false);
+      }
+    }
   }
 
   &.from-left {
@@ -49,18 +100,11 @@
     &::after {
       bottom: -18px;
       width: 18px;
-      height: 3px;
+      height: 4px;
       margin-right: 8px;
+      color: $base-color;
       background-color: $background-color;
-      // prettier-ignore
-      box-shadow:
-        -4px 0 $base-color,
-        4px 0 $base-color,
-        -4px 4px $background-color,
-        0 4px $base-color,
-        -8px 4px $base-color,
-        -4px 8px $base-color,
-        -8px 8px $base-color;
+      @include box-shadow($background-color);
     }
   }
 
@@ -82,18 +126,10 @@
     &::after {
       bottom: -18px;
       width: 18px;
-      height: 3px;
+      height: 4px;
       margin-left: 8px;
       background-color: $background-color;
-      // prettier-ignore
-      box-shadow:
-        -4px 0 $base-color,
-        4px 0 $base-color,
-        4px 4px $background-color,
-        0 4px $base-color,
-        8px 4px $base-color,
-        4px 8px $base-color,
-        8px 8px $base-color;
+      @include box-shadow($background-color, false);
     }
   }
 }

@@ -1,100 +1,105 @@
 <div align="center">
-  <a href="https://bcrikko.github.io/NES.css/" target="_blank"><img src="https://user-images.githubusercontent.com/5305599/49061716-da649680-f254-11e8-9a89-d95a7407ec6a.png" alt="NES.css: NES-style  CSS framework" style="max-width:100%;" width="600" height="315"></a>
+  <a href="https://nostalgic-css.github.io/NES.css/" target="_blank"><img src="https://user-images.githubusercontent.com/5305599/49061716-da649680-f254-11e8-9a89-d95a7407ec6a.png" alt="NES.css: NES-style  CSS framework" style="max-width: 100%;" width="600" height="315"></a>
 
-  <a href="README.md">English</a> / <a href="README.md">日本語</a>
+  <a href=".github/README-jp.md">日本語</a> / <a href=".github/README-zh-CN.md">简体中文</a> / <a href=".github/README-es.md">Español</a> / <a href=".github/README-pt-BR.md">Português</a> / <a href=".github/README-ru.md">Русский</a>
 </div>
 
-NES.css is a **NES-style(8bit-like)** CSS Framework.  
-NES.cssは **ファミコン風(8bit ライク)** なCSSフレームワークです。
+NES.css is a **NES-style(8bit-like)** CSS Framework.
 
+[![Gitter][gitter-badge]][gitter] [![Commitizen friendly][commitizen-badge]][commitizen]
 
-## Install
+## Installation
 
-### CDN
+### Styles
+
+NES.css is available via either npm (preferred), Yarn, or a CDN.
+
+#### via package manager
+
+```shell
+npm install nes.css
+# or
+yarn add nes.css
+```
+
+Our `package.json` contains some additional metadata under the following keys:
+* `sass` - path to our main Sass source file
+* `style` - path to our non-minified CSS
+
+#### via CDN
+
+Import the CSS via a `<link />` element:
 
 ```html
 <!-- minify -->
-<link href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/nes.css@2.2.1/css/nes.min.css" rel="stylesheet" />
 <!-- latest -->
-<link href="https://unpkg.com/nes.css/css/nes.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+<!-- core style only -->
+<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 ```
 
-OR
+### Fonts
 
-```html
-<!-- non-minified -->
-<link href="https://unpkg.com/nes.css@0.0.2/css/nes.css" rel="stylesheet" />
-<!-- latest -->
-<link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
-```
+NES.css doesn't provide any fonts, but we do maintain the following list of fonts that we recommend for usage alongside the library.
 
-### npm
-
-TODO: npm での使用方法を書く
-
+| Language  | Font                                                               |
+| --------- | ------------------------------------------------------------------ |
+| (Default) | [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) |
+| English   | [Kongtext](https://www.dafont.com/kongtext.font)                   |
+| Japanese  | [美咲フォント](http://littlelimit.net/misaki.htm)                  |
+| Japanese  | [Nu もち](http://kokagem.sakura.ne.jp/font/mochi/)                 |
+| Korean    | [둥근모꼴](http://cactus.tistory.com/193)                              |
 
 ## Usage
 
-NES.cssはコンポーネントのスタイルのみを提供しています。レイアウトはみなさんが好きなように定義してください。
+NES.css only provides components. You will need to define your own layout.
 
-デフォルトでは`Press Start 2P`フォントを使っています。英語以外（日本語など）で利用される場合は、別途フォントを読み込んで使ってください。
+The recommended font for NES.css is [Press Start 2P][press-start-2p-font]. However, [Press Start 2P][press-start-2p-font] only supports English characters. When you're using this framework with any language other than English, please use another font. Follow the Google Fonts [instructions][google-fonts-guide] about how to include them, or simply include it as below:
 
-TODO: 詳細を書く
+```html
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
 
+    <style>
+      html, body, pre, code, kbd, samp {
+          font-family: "font-family you want to use";
+      }
+    </style>
+</head>
+```
 
 ## CSS Only
 
-NES.cssはCSSのみで構成されています。JavaScriptは不要です。
-
+NES.css only requires CSS and doesn't depend on any JavaScript.
 
 ## Browser Support
 
-次のブラウザの最新バージョンをサポートしています。
-
+NES.css is compatible with the newest version of the following browsers:
 * Chrome
 * Firefox
 * Safari
 
-未確認
+Untested
 * IE/Edge
-
-
-## Development
-
-### Commands
-```sh
-git clone git@github.com:BcRikko/NES.css.git
-cd NES.css
-
-npm i
-
-npm run watch
-npm run build
-```
-
-pre-commit hookにより、コミット時に自動でLint→format→buildが走り、`css`ディレクトリにファイルが出力されます。
-TODO: ビルドはCIでするように変更したい
-
-### Directories
-```
-.
-|- index.html: Demo page
-|- style.css: Demo page style
-|- css: Distribution files
-|-　scss: Source
-    |- base
-    |   |- reboot.scss: **Don't change!** (Bootstrap Reboot)
-    |   |- generic.scss: Generic style and overwrite reboot.css
-    |   |- variables.scss: Common variables
-    |- elements
-    |- form
-    |- icons: For 16x16 icon
-    |- pixel-arts: For icon other than 16x16 icon.
-    |- utilities
-```
-
-
 
 ## Copyright and license
 
 Code and documentation copyright 2018 [B.C.Rikko](https://github.com/BcRikko). Code released under the MIT License. Docs released under Creative Commons.
+
+## Development
+
+If you'd like to help us out with the project, we welcome contributions of all types! Check out our [`CONTRIBUTING.md`][contributing-document] for more details on how you can help make NES.css amazing!
+
+
+
+
+
+[commitizen]: http://commitizen.github.io/cz-cli/
+[commitizen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[contributing-document]: CONTRIBUTING.md
+[gitter]: https://gitter.im/nostalgic-css/Lobby
+[gitter-badge]: https://img.shields.io/gitter/room/nostalgic-css/Lobby.svg
+[google-fonts-guide]: https://developers.google.com/fonts/docs/getting_started
+[press-start-2p-font]: https://fonts.google.com/specimen/Press+Start+2P?selection.family=Press+Start+2P
